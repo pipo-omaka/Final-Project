@@ -1,0 +1,73 @@
+### สร้าง Poll
+POST http://localhost:8080/polls
+Content-Type: application/json
+
+{
+  "question": "คุณชอบผลไม้อะไรมากที่สุด?"
+}
+
+### สร้าง Option 1
+POST http://localhost:8080/options
+Content-Type: application/json
+
+{
+  "text": "มะม่วง",
+  "pollId": 1
+}
+
+### สร้าง Option 2
+POST http://localhost:8080/options
+Content-Type: application/json
+
+{
+  "text": "แตงโม",
+  "pollId": 1
+}
+
+### โหวต Option 1 ครั้ง
+POST http://localhost:8080/options/1/vote
+
+### โหวต Option 2 ครั้ง
+POST http://localhost:8080/options/2/vote
+
+
+
+### ดึงข้อมูลโพลล์พร้อมตัวเลือก
+GET http://localhost:8080/polls/1
+
+
+
+### แก้ไขคำถามของ Poll
+PUT http://localhost:8080/polls/1
+Content-Type: application/json
+
+{
+  "question": "คุณชอบผลไม้ฤดูร้อนที่สุด?"
+}
+
+### แก้ไขข้อความของ Option
+PUT http://localhost:8080/options/1
+Content-Type: application/json
+
+{
+  "text": "มะม่วงน้ำดอกไม้"
+}
+
+### ลบ Poll
+DELETE http://localhost:8080/polls/1
+
+### ดู Poll ที่ถูกลบ (ควรได้ Not Found)
+GET http://localhost:8080/polls/1
+
+### เพิ่ม Option ให้ Poll ที่ไม่อยู่ (ควรได้ 400)
+POST http://localhost:8080/options
+Content-Type: application/json
+
+{
+  "text": "ฝรั่ง",
+  "pollId": 999
+}
+
+### โหวต Option ที่ไม่มีอยู่ (ควรได้ 404)
+POST http://localhost:8080/options/999/vote
+
